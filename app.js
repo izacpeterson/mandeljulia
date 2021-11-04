@@ -1,23 +1,30 @@
 function setup() {
   //   createCanvas(1920 / 3, 1200 / 3);
-  createCanvas(1920 * 4, 1200 * 4);
+  //   createCanvas(1920 * 4, 1200 * 4);
+  createCanvas(windowWidth / 1, windowHeight / 1);
 
-  pixelDensity(1);
+  //   pixelDensity(1);
   loadPixels();
 
   noLoop();
 }
-let maxIterations = 1000;
+let maxIterations = 100;
 let counter = 0;
+let scale = 0.1;
+let randA = Math.random() * 2 - 1;
+let randB = Math.random() * 2 - 1;
 
+console.log(`A:${randA}, B:${randB}`);
 function draw() {
-  counter++;
   for (let x = 0; x < width; x++) {
     for (let y = 0; y < height; y++) {
       let a = map(x, 0, width, -2, 2);
       let b = map(y, 0, height, -2, 2);
-      a /= 9;
-      b /= 16;
+      //   let scale = 5000000000;
+      a /= 9 * scale;
+      b /= 16 * scale;
+
+      a += 0.0001;
 
       let ca = a / 2;
       let cb = b / 2;
@@ -28,11 +35,11 @@ function draw() {
         let aa = a * a - b * b;
         let bb = 2 * a * b;
 
-        a = aa - 0.8;
-        b = bb - 0.156;
+        a = aa - randA;
+        b = bb - randB;
 
-        // a = aa - document.querySelector("#range").value;
-        // b = bb - 0.156;
+        // a = aa - 0.81;
+        // b = bb + 0.16;
 
         if (a + b > 16) {
           break;
@@ -40,9 +47,9 @@ function draw() {
 
         n++;
       }
-      let brightness = map(n, 0, maxIterations, 0, 500);
-      //   brightness = map(sqrt(brightness), 0, 1, 0, 255);
-      if (n === maxIterations) {
+      let brightness = map(n, 0, maxIterations, 0, 255);
+      //   brightness = map(brightness, 0, 1, 0, 255);
+      if (n >= maxIterations) {
         brightness = 0;
       }
 
@@ -54,4 +61,5 @@ function draw() {
     }
   }
   updatePixels();
+  //   saveCanvas("myCanvas", "png");
 }
