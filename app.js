@@ -1,20 +1,17 @@
 function setup() {
-  //   createCanvas(1920 / 3, 1200 / 3);
+  createCanvas(1920 / 1, 1200 / 1);
   //   createCanvas(1920 * 4, 1200 * 4);
-  createCanvas(windowWidth / 1, windowHeight / 1);
+  //   createCanvas(windowWidth / 1, windowHeight / 1);
 
-  //   pixelDensity(1);
+  pixelDensity(1);
   loadPixels();
 
   noLoop();
 }
-let maxIterations = 100;
+let maxIterations = 1000;
 let counter = 0;
-let scale = 0.1;
-let randA = Math.random() * 2 - 1;
-let randB = Math.random() * 2 - 1;
+let scale = 2.2;
 
-console.log(`A:${randA}, B:${randB}`);
 function draw() {
   for (let x = 0; x < width; x++) {
     for (let y = 0; y < height; y++) {
@@ -35,8 +32,8 @@ function draw() {
         let aa = a * a - b * b;
         let bb = 2 * a * b;
 
-        a = aa - randA;
-        b = bb - randB;
+        a = aa - 0.81;
+        b = bb - 0.17;
 
         // a = aa - 0.81;
         // b = bb + 0.16;
@@ -61,5 +58,5 @@ function draw() {
     }
   }
   updatePixels();
-  //   saveCanvas("myCanvas", "png");
+  saveCanvas("myCanvas", "png");
 }
